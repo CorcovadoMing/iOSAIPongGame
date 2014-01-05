@@ -26,4 +26,35 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    for (UITouch *touch in touches)
+    {
+        CGPoint touchPoint = [touch locationInView:self.view];
+        if(touchPoint.y < 240)
+        {
+            self.viewPaddle1.center = CGPointMake(touchPoint.x, self.viewPaddle1.center.y);
+        }
+        else
+        {
+            self.viewPaddle2.center = CGPointMake(touchPoint.x, self.viewPaddle2.center.y);
+        }
+    }
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self touchesBegan:touches withEvent:event];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"touchesEnded");
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"touchesCancelled");
+}
+
 @end

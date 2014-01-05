@@ -475,6 +475,7 @@
 				3A358C5118783FD900E66F42 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3A358C5218783FD900E66F42 /* Build configuration list for PBXNativeTarget "AIPongGameTests" */ = {
 			isa = XCConfigurationList;
@@ -483,6 +484,7 @@
 				3A358C5418783FD900E66F42 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
