@@ -28,12 +28,35 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) animate
+- (BOOL)checkPuckCollision:(CGRect)rect DirX:(float)x DirY:(float)y
 {
-    self.viewPuck.center = CGPointMake(self.viewPuck.center.x + dx*speed, self.viewPuck.center.y + dy*speed);
+    if(CGRectIntersectsRect(self.viewPuck.frame, rect))
+    {
+        if(x != 0)
+        {
+            dx = x;
+        }
+        if(y != 0)
+        {
+            dy = y;
+        }
+        return true;
+    }
+    return false;
 }
 
-- (void) reset
+- (void)animate
+{
+    self.viewPuck.center = CGPointMake(self.viewPuck.center.x + dx*speed, self.viewPuck.center.y + dy*speed);
+    
+    [self checkPuckCollision:CGRectMake(-10, 0, 20, 568) DirX:fabsf(dx) DirY:0];
+    [self checkPuckCollision:CGRectMake(310, 0, 20, 568) DirX:-fabsf(dx) DirY:0];
+    
+    [self checkPuckCollision:self.viewPaddle1.frame DirX:(self.viewPuck.center.x - self.viewPaddle1.center.x) / 32.0 DirY:1];
+    [self checkPuckCollision:self.viewPaddle2.frame DirX:(self.viewPuck.center.x - self.viewPaddle2.center.x) / 32.0 DirY:-1];
+}
+
+- (void)reset
 {
     if(arc4random() % 2 == 0)
     {
