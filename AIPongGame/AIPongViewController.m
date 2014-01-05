@@ -31,12 +31,14 @@
     for (UITouch *touch in touches)
     {
         CGPoint touchPoint = [touch locationInView:self.view];
-        if(touchPoint.y < 240)
+        if(touch1 == nil && touchPoint.y < 284)
         {
+            touch1 = touch;
             self.viewPaddle1.center = CGPointMake(touchPoint.x, self.viewPaddle1.center.y);
         }
-        else
+        else if(touch2 == nil && touchPoint.y >= 284)
         {
+            touch2 = touch;
             self.viewPaddle2.center = CGPointMake(touchPoint.x, self.viewPaddle2.center.y);
         }
     }
@@ -44,17 +46,37 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self touchesBegan:touches withEvent:event];
+    for (UITouch *touch in touches) {
+        CGPoint touchPoint = [touch locationInView:self.view];
+        if(touch == touch1)
+        {
+            self.viewPaddle1.center = CGPointMake(touchPoint.x, self.viewPaddle1.center.y);
+        }
+        else if(touch == touch2)
+        {
+            self.viewPaddle2.center = CGPointMake(touchPoint.x, self.viewPaddle2.center.y);
+        }
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"touchesEnded");
+    for(UITouch *touch in touches)
+    {
+        if(touch == touch1)
+        {
+            touch1 = nil;
+        }
+        else if(touch == touch2)
+        {
+            touch2 = nil;
+        }
+    }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"touchesCancelled");
+    [self touchesEnded:touches withEvent:event];
 }
 
 @end

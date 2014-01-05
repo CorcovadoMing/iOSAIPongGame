@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface AIPongViewController : UIViewController
-
+{
+    UITouch *touch1;
+    UITouch *touch2;
+}
 @property (retain, nonatomic) IBOutlet UIView *viewPaddle1;
 @property (retain, nonatomic) IBOutlet UIView *viewPaddle2;
 @property (weak, nonatomic) IBOutlet UIView *viewPuck;
