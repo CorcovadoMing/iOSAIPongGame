@@ -18,6 +18,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    [self reset];
+    [self start];
 }
 
 - (void)didReceiveMemoryWarning
@@ -25,6 +27,65 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void) animate
+{
+    self.viewPuck.center = CGPointMake(self.viewPuck.center.x + dx*speed, self.viewPuck.center.y + dy*speed);
+}
+
+- (void) reset
+{
+    if(arc4random() % 2 == 0)
+    {
+        dx = -1;
+    }
+    else
+    {
+        dx = 1;
+    }
+    
+    if(dy != 0)
+    {
+        dy = -dy;
+    }
+    else if(arc4random() % 2 == 0)
+    {
+        dy = -1;
+    }
+    else
+    {
+        dy = 1;
+    }
+    
+    self.viewPuck.center = CGPointMake(15+arc4random()%(320-30), 284);
+    
+    speed = 2;
+}
+
+- (void)start
+{
+    if(timer == nil)
+    {
+        timer = [NSTimer
+                  scheduledTimerWithTimeInterval:1.0/60.0
+                  target:self
+                  selector:@selector(animate)
+                  userInfo:NULL
+                  repeats:YES];
+    }
+    self.viewPuck.hidden = NO;
+}
+
+- (void)stop
+{
+    if(timer != nil)
+    {
+        [timer invalidate];
+        timer = nil;
+    }
+    self.viewPuck.hidden = YES;
+}
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
