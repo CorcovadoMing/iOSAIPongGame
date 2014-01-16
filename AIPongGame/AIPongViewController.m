@@ -103,7 +103,7 @@
     
     self.viewPuck.center = CGPointMake(15+arc4random()%(320-30), 284);
     
-    speed = 2;
+    speed = 4;
 }
 
 - (void)start
