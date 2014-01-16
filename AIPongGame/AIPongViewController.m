@@ -45,6 +45,25 @@
     return false;
 }
 
+- (BOOL)checkGoal
+{
+    if(self.viewPuck.center.y < 0 || self.viewPuck.center.y >= 568)
+    {
+        int s1 = [self.viewScore1.text intValue];
+        int s2 = [self.viewScore2.text intValue];
+        
+        if(self.viewPuck.center.y < 0) s2++; else s1++;
+        
+        self.viewScore1.text = [NSString stringWithFormat:@"%u", s1];
+        self.viewScore2.text = [NSString stringWithFormat:@"%u", s2];
+        
+        [self reset];
+        return true;
+    }
+    return false;
+}
+
+
 - (void)animate
 {
     self.viewPuck.center = CGPointMake(self.viewPuck.center.x + dx*speed, self.viewPuck.center.y + dy*speed);
@@ -54,6 +73,8 @@
     
     [self checkPuckCollision:self.viewPaddle1.frame DirX:(self.viewPuck.center.x - self.viewPaddle1.center.x) / 32.0 DirY:1];
     [self checkPuckCollision:self.viewPaddle2.frame DirX:(self.viewPuck.center.x - self.viewPaddle2.center.x) / 32.0 DirY:-1];
+    
+    [self checkGoal];
 }
 
 - (void)reset

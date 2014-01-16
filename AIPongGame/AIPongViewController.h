@@ -22,5 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIView *viewPaddle1;
 @property (weak, nonatomic) IBOutlet UIView *viewPaddle2;
 @property (weak, nonatomic) IBOutlet UIView *viewPuck;
+@property (strong, nonatomic) IBOutlet UILabel *viewScore1;
+@property (strong, nonatomic) IBOutlet UILabel *viewScore2;
 
 @end
